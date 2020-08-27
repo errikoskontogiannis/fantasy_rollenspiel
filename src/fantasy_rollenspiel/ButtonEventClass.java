@@ -37,10 +37,10 @@ public class ButtonEventClass extends JFrame implements ActionListener {
         sButton.setForeground(Color.WHITE);
 
         wText = new JLabel("Willkomen im Auenland!");
-        bText = new JLabel(" - Betaetigen Sie die Schaltflaeche Spielen, um zu beginnen.");
+        bText = new JLabel("Betaetigen Sie die Schaltflaeche Spielen, um zu beginnen.");
 
-        wText.setBounds(160, 0, 500, 36);
-        bText.setBounds(130, 0, 500, 16);
+        wText.setBounds(160, 0, 200, 50);
+        bText.setBounds(160, 0, 200, 50);
 
         Font wSchrift = wText.getFont().deriveFont(Font.BOLD + Font.PLAIN, 36);
         Font bSchrift = bText.getFont().deriveFont(Font.BOLD + Font.PLAIN, 16);
