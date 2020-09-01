@@ -1,5 +1,7 @@
 package fantasy_rollenspiel;
 
+// Held
+
 public class Held extends Spielcharakter {
 
 	protected String name;

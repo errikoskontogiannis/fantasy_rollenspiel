@@ -1,5 +1,7 @@
 package fantasy_rollenspiel;
 
+// Waffe
+
 public class Waffe {
 
 	private String material;

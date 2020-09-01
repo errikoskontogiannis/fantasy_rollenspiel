@@ -2,6 +2,8 @@ package fantasy_rollenspiel;
 
 import java.util.Scanner;
 
+// Spiel
+
 public class Spiel {
 
 	private Held held;

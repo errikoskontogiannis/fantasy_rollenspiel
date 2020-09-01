@@ -1,5 +1,7 @@
 package fantasy_rollenspiel;
 
+// Kampfregel
+
 public class Kampfregel {
 
 	private Wuerfel pW6 = new Wuerfel(6);

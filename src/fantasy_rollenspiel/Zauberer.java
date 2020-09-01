@@ -1,5 +1,7 @@
 package fantasy_rollenspiel;
 
+// Zauberer
+
 public class Zauberer extends Held {
 
 	private int zauberKraft;

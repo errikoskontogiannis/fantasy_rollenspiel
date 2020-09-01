@@ -2,6 +2,8 @@ package fantasy_rollenspiel;
 
 import java.util.Random;
 
+// Wuerfel
+
 public class Wuerfel {
 
 	static int anzahlSeiten;

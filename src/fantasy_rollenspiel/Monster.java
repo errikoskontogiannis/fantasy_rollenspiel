@@ -1,5 +1,7 @@
 package fantasy_rollenspiel;
 
+// Monster
+
 public class Monster extends Spielcharakter {
 
 	private int angriffswert;

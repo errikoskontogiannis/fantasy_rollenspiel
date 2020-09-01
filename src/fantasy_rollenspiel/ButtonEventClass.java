@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 
 import java.util.Scanner;
 
+// ButtonEventClass
+
 public class ButtonEventClass extends JFrame implements ActionListener {
 
     /**

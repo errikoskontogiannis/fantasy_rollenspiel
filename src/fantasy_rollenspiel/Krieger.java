@@ -1,5 +1,7 @@
 package fantasy_rollenspiel;
 
+// Krieger
+
 public class Krieger extends Held {
 
 	private int ausdauer;
