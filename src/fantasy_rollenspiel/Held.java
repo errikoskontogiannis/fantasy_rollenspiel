@@ -1,6 +1,6 @@
 package fantasy_rollenspiel;
 
-public class Held {
+public class Held extends Spielcharakter {
 
 	protected String name;
 	protected int staerke;
@@ -90,6 +90,16 @@ public class Held {
 			angriffswert = staerke;
 
 		}
+
+	}
+
+	public void statusAusgeben() {
+
+		System.out.println("Status von dem Held " + this.getName() + ":");
+		System.out.println("Angriffswert: " + this.getAngriffswert());
+		System.out.println("Lebenspunkte: " + this.getLebenspunkte());
+		System.out.println("Waffe: " + this.getWaffe());
+		System.out.println("Staerke: " + this.getStaerke());
 
 	}
 

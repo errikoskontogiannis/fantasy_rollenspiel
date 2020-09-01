@@ -14,15 +14,31 @@ public class Krieger extends Held {
 
 	public void angriffswertBerechnen() {
 
-		if (meineWaffe != null) {
+		super.angriffswertBerechnen();
+		this.setAngriffswert(angriffswert*ausdauer);
 
-			angriffswert = (staerke + meineWaffe.getBonus() * ausdauer) ;
+	}
 
-		} else {
+	public void setAusdauer(int pAusdauer) {
 
-			angriffswert = (staerke * ausdauer) ;
+		ausdauer = pAusdauer;
 
-		}
+	}
+
+	public int getAusdauer() {
+
+		return ausdauer;
+
+	}
+
+	public void statusAusgeben() {
+
+		System.out.println("Status von dem Krieger " + this.getName() + ": ");
+		System.out.println("Angriffswert: " + this.getAngriffswert());
+		System.out.println("Lebenspunkte: " + this.getLebenspunkte());
+		System.out.println("Waffe: " + this.getWaffe());
+		System.out.println("Staerke: " + this.getStaerke());
+		System.out.println("Ausdauer: " + this.getAusdauer());
 
 	}
 

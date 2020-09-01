@@ -18,4 +18,27 @@ public class Zauberer extends Held {
 
 	}
 
+	public void setZauberKraft(int pZauberKraft) {
+
+		zauberKraft = pZauberKraft;
+
+	}
+
+	public int getZauberKraft() {
+
+		return zauberKraft;
+
+	}
+
+	public void statusAusgeben() {
+
+		System.out.println("Status von dem Zauberer " + this.getName() + ": ");
+		System.out.println("Angriffswert: " + this.getAngriffswert());
+		System.out.println("Lebenspunkte: " + this.getLebenspunkte());
+		System.out.println("Waffe: " + this.getWaffe());
+		System.out.println("Staerke: " + this.getStaerke());
+		System.out.println("Zauberkraft: " + this.getZauberKraft());
+
+	}
+
 }

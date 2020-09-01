@@ -1,6 +1,6 @@
 package fantasy_rollenspiel;
 
-public class Monster {
+public class Monster extends Spielcharakter {
 
 	private int angriffswert;
 	private double lebenspunkte;
@@ -33,6 +33,14 @@ public class Monster {
 	public double getLebenspunkte() {
 
 		return lebenspunkte;
+
+	}
+
+	public void statusAusgeben() {
+
+		System.out.println("Status von dem Monster:");
+		System.out.println("Angriffswert: " + this.getAngriffswert());
+		System.out.println("Lebenspunkte: " + this.getLebenspunkte());
 
 	}
 

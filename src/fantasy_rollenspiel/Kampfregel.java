@@ -63,8 +63,8 @@ public class Kampfregel {
 
 	private void anzeigen() {
 
-		System.out.println("Angriffswert von " + cHeld.getName() + ": " + cHeld.getAngriffswert());
-		System.out.println("Angriffswert vom Monster: " + cMonster.getAngriffswert());
+		cHeld.statusAusgeben();
+		cMonster.statusAusgeben();
 
 	}
 
