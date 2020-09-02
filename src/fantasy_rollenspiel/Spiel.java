@@ -6,182 +6,226 @@ import java.util.Scanner;
 
 public class Spiel {
 
-	private Held held;
-	private Zauberer zauberer;
-	private Krieger krieger;
+    private Held held;
+    private Zauberer zauberer;
+    private Krieger krieger;
 
-	private Monster monster = new Monster(550, 5);
-	private Kampfregel kampfregel = new Kampfregel();
+    private String aktuellerHeldenTyp;
 
-	private Wuerfel pW6 = new Wuerfel(6);
-	private Wuerfel pW10 = new Wuerfel(10);
+    private Monster monster = new Monster(550, 5);
+    private Kampfregel kampfregel = new Kampfregel();
 
-	private int wuerfelJa;
-	private int wuerfelNein;
+    private Wuerfel pW6 = new Wuerfel(6);
+    private Wuerfel pW10 = new Wuerfel(10);
 
-	Scanner in = new Scanner(System.in);
+    private int wuerfelJa;
+    private int wuerfelNein;
 
-	public Spiel(String pHeldenTyp) {
+    Scanner in = new Scanner(System.in);
 
-		wuerfelJa = this.pW6.wuerfeln() + this.pW10.wuerfeln();
-		wuerfelNein = this.pW6.wuerfeln() + this.pW10.wuerfeln();
+    public Spiel(String pHeldenTyp) {
 
-		if (pHeldenTyp.equals("Held") || pHeldenTyp.equals("Zauberer") || pHeldenTyp.equals("Krieger")) {
+        aktuellerHeldenTyp = pHeldenTyp;
 
-			System.out.println("Sie haben den Spielcharakter " + pHeldenTyp + " gewaehlt.");
+        if (aktuellerHeldenTyp.equals("Held") || aktuellerHeldenTyp.equals("Zauberer") || aktuellerHeldenTyp.equals("Krieger")) {
 
-			if (pHeldenTyp.equals("Held")) {
+            System.out.println("Sie haben den Spielcharakter " + pHeldenTyp + " gewaehlt.");
 
-				System.out.println("Bitte geben Sie Ihrem Helden einen Namen.");
+            spielen();
 
-				String heldenName = in.nextLine();
+        } else {
 
-				System.out.println("Waffenmoeglichkeitswuerfel lädt...");
+            throw new IllegalArgumentException("Bitte geben Sie einen der verfuegbaren Heldentypen ein! (Verfuegbare Heldentypen: Held, Zauberer und Krieger)");
 
-				if (wuerfelJa > wuerfelNein) {
+        }
 
-					System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + heldenName + " auswaehlen.");
+    }
 
-					System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Helden.");
+    public void spielen() {
 
-					String heldenWaffeMaterial = in.nextLine();
+        wuerfelJa = this.pW6.wuerfeln() + this.pW10.wuerfeln();
+        wuerfelNein = this.pW6.wuerfeln() + this.pW10.wuerfeln();
 
-					if (heldenWaffeMaterial.equals("Holz") || heldenWaffeMaterial.equals("Stein") || heldenWaffeMaterial.equals("Eisen") || heldenWaffeMaterial.equals("Gold") || heldenWaffeMaterial.equals("Diamant")) {
+        if (aktuellerHeldenTyp.equals("Held")) {
 
-						held = new Held(heldenName, 550, 0, 5);
+            System.out.println("");
+            System.out.println("Bitte geben Sie Ihrem Helden einen Namen.");
 
-						held.setWaffe(heldenWaffeMaterial);
+            String heldenName = in.nextLine();
 
-						held.angriffswertBerechnen();
+            System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
-						held.angreifen(monster, kampfregel);
+            if (wuerfelJa > wuerfelNein) {
 
-					} else {
+                System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + heldenName + " auswaehlen.");
 
-						throw new IllegalArgumentException("Bitte geben Sie eines der verfuegbaren Materialien ein! (Verfuegbare Materialien: Holz, Stein, Eisen, Gold und Diamant)");
+                System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Helden.");
 
-					}
+                String heldenWaffeMaterial = in.nextLine();
 
-				} else if (wuerfelJa < wuerfelNein) {
+                if (heldenWaffeMaterial.equals("Holz") || heldenWaffeMaterial.equals("Stein") || heldenWaffeMaterial.equals("Eisen") || heldenWaffeMaterial.equals("Gold") || heldenWaffeMaterial.equals("Diamant")) {
 
-					System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + heldenName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
+                    held = new Held(heldenName, 550, 0, 5);
 
-					held = new Held(heldenName, 550, 0, 5);
+                    held.setWaffe(heldenWaffeMaterial);
 
-					held.angriffswertBerechnen();
+                    held.angriffswertBerechnen();
 
-					held.angreifen(monster, kampfregel);
+                    held.angreifen(monster, kampfregel);
 
-				} else if (wuerfelJa == wuerfelNein) {
+                    erneutSpielen();
 
-					System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
+                } else {
 
-				}
+                    throw new IllegalArgumentException("Bitte geben Sie eines der verfuegbaren Materialien ein! (Verfuegbare Materialien: Holz, Stein, Eisen, Gold und Diamant)");
 
-			} else if (pHeldenTyp.equals("Zauberer")) {
+                }
 
-				System.out.println("Bitte geben Sie Ihrem Zauberer einen Namen.");
+            } else if (wuerfelJa < wuerfelNein) {
 
-				String zaubererName = in.nextLine();
+                System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + heldenName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
 
-				System.out.println("Waffenmoeglichkeitswuerfel lädt...");
+                held = new Held(heldenName, 550, 0, 5);
 
-				if (wuerfelJa > wuerfelNein) {
+                held.angriffswertBerechnen();
 
-					System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + zaubererName + " auswaehlen.");
+                held.angreifen(monster, kampfregel);
 
-					System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Zauberers.");
+                erneutSpielen();
 
-					String zaubererWaffeMaterial = in.nextLine();
+            } else if (wuerfelJa == wuerfelNein) {
 
-					if (zaubererWaffeMaterial.equals("Holz") || zaubererWaffeMaterial.equals("Stein") || zaubererWaffeMaterial.equals("Eisen") || zaubererWaffeMaterial.equals("Gold") || zaubererWaffeMaterial.equals("Diamant")) {
+                System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
 
-						zauberer = new Zauberer(zaubererName, 550, 0, 5, 550);
+            }
 
-						zauberer.setWaffe(zaubererWaffeMaterial);
+        } else if (aktuellerHeldenTyp.equals("Zauberer")) {
 
-						zauberer.angriffswertBerechnen();
+            System.out.println("");
+            System.out.println("Bitte geben Sie Ihrem Zauberer einen Namen.");
 
-						zauberer.angreifen(monster, kampfregel);
+            String zaubererName = in.nextLine();
 
-					} else {
+            System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
-						throw new IllegalArgumentException("Bitte geben Sie eines der verfuegbaren Materialien ein! (Verfuegbare Materialien: Holz, Stein, Eisen, Gold und Diamant)");
+            if (wuerfelJa > wuerfelNein) {
 
-					}
+                System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + zaubererName + " auswaehlen.");
 
-				} else if (wuerfelJa < wuerfelNein) {
+                System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Zauberers.");
 
-					System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + zaubererName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
+                String zaubererWaffeMaterial = in.nextLine();
 
-					zauberer = new Zauberer(zaubererName, 550, 0, 5, 550);
+                if (zaubererWaffeMaterial.equals("Holz") || zaubererWaffeMaterial.equals("Stein") || zaubererWaffeMaterial.equals("Eisen") || zaubererWaffeMaterial.equals("Gold") || zaubererWaffeMaterial.equals("Diamant")) {
 
-					zauberer.angriffswertBerechnen();
+                    zauberer = new Zauberer(zaubererName, 550, 0, 5, 550);
 
-					zauberer.angreifen(monster, kampfregel);
+                    zauberer.setWaffe(zaubererWaffeMaterial);
 
-				} else if (wuerfelJa == wuerfelNein) {
+                    zauberer.angriffswertBerechnen();
 
-					System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
+                    zauberer.angreifen(monster, kampfregel);
 
-				}
+                    erneutSpielen();
 
-			} else if (pHeldenTyp.equals("Krieger")) {
+                } else {
 
-				System.out.println("Bitte geben Sie Ihrem Krieger einen Namen.");
+                    throw new IllegalArgumentException("Bitte geben Sie eines der verfuegbaren Materialien ein! (Verfuegbare Materialien: Holz, Stein, Eisen, Gold und Diamant)");
 
-				String kriegerName = in.nextLine();
+                }
 
-				System.out.println("Waffenmoeglichkeitswuerfel lädt...");
+            } else if (wuerfelJa < wuerfelNein) {
 
-				if (wuerfelJa > wuerfelNein) {
+                System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + zaubererName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
 
-					System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + kriegerName + " auswaehlen.");
+                zauberer = new Zauberer(zaubererName, 550, 0, 5, 550);
 
-					System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Kriegers.");
+                zauberer.angriffswertBerechnen();
 
-					String kriegerWaffeMaterial = in.nextLine();
+                zauberer.angreifen(monster, kampfregel);
 
-					if (kriegerWaffeMaterial.equals("Holz") || kriegerWaffeMaterial.equals("Stein") || kriegerWaffeMaterial.equals("Eisen") || kriegerWaffeMaterial.equals("Gold") || kriegerWaffeMaterial.equals("Diamant")) {
+                erneutSpielen();
 
-						krieger = new Krieger(kriegerName, 550, 0, 5, 5);
+            } else if (wuerfelJa == wuerfelNein) {
 
-						krieger.setWaffe(kriegerWaffeMaterial);
+                System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
 
-						krieger.angriffswertBerechnen();
+            }
 
-						krieger.angreifen(monster, kampfregel);
+        } else if (aktuellerHeldenTyp.equals("Krieger")) {
 
-					} else {
+            System.out.println("");
+            System.out.println("Bitte geben Sie Ihrem Krieger einen Namen.");
 
-						throw new IllegalArgumentException("Bitte geben Sie eines der verfuegbaren Materialien ein! (Verfuegbare Materialien: Holz, Stein, Eisen, Gold und Diamant)");
+            String kriegerName = in.nextLine();
 
-					}
+            System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
-				} else if (wuerfelJa < wuerfelNein) {
+            if (wuerfelJa > wuerfelNein) {
 
-					System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + kriegerName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
+                System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + kriegerName + " auswaehlen.");
 
-					krieger = new Krieger(kriegerName, 550, 0, 5, 5);
+                System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Kriegers.");
 
-					krieger.angriffswertBerechnen();
+                String kriegerWaffeMaterial = in.nextLine();
 
-					krieger.angreifen(monster, kampfregel);
+                if (kriegerWaffeMaterial.equals("Holz") || kriegerWaffeMaterial.equals("Stein") || kriegerWaffeMaterial.equals("Eisen") || kriegerWaffeMaterial.equals("Gold") || kriegerWaffeMaterial.equals("Diamant")) {
 
-				} else if (wuerfelJa == wuerfelNein) {
+                    krieger = new Krieger(kriegerName, 550, 0, 5, 5);
 
-					System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
+                    krieger.setWaffe(kriegerWaffeMaterial);
 
-				}
+                    krieger.angriffswertBerechnen();
 
-			} else {
+                    krieger.angreifen(monster, kampfregel);
 
-				throw new IllegalArgumentException("Bitte geben Sie einen der verfuegbaren Heldentypen ein! (Verfuegbare Heldentypen: Held, Zauberer und Krieger)");
+                    erneutSpielen();
 
-			}
+                } else {
 
-		}
+                    throw new IllegalArgumentException("Bitte geben Sie eines der verfuegbaren Materialien ein! (Verfuegbare Materialien: Holz, Stein, Eisen, Gold und Diamant)");
 
-	}
+                }
+
+            } else if (wuerfelJa < wuerfelNein) {
+
+                System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + kriegerName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
+
+                krieger = new Krieger(kriegerName, 550, 0, 5, 5);
+
+                krieger.angriffswertBerechnen();
+
+                krieger.angreifen(monster, kampfregel);
+
+                erneutSpielen();
+
+            } else if (wuerfelJa == wuerfelNein) {
+
+                System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
+
+            }
+
+        }
+
+    }
+
+    public void erneutSpielen() {
+
+        System.out.println("");
+        System.out.println("Moechten Sie noch eine Runde spielen?");
+
+        String antwortSpielen = in.nextLine();
+
+        if (antwortSpielen.equals("Ja") || antwortSpielen.equals("Nein") || antwortSpielen.equals("ja") || antwortSpielen.equals("nein")) {
+
+            spielen();
+
+        } else {
+
+            throw new IllegalArgumentException("Bitte waehlen Sie eine der verfuegbaren Optionen! (Verfuegbare Optionen: Ja oder Nein)");
+
+        }
+
+    }
 
 }

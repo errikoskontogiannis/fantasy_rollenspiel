@@ -35,12 +35,16 @@ public class Krieger extends Held {
 
 	public void statusAusgeben() {
 
-		System.out.println("Status von dem Krieger " + this.getName() + ": ");
+		System.out.println("");
+		System.out.println("-------------------------------");
+		System.out.println("Status des Kriegers " + this.getName() + ": ");
+		System.out.println("-------------------------------");
 		System.out.println("Angriffswert: " + this.getAngriffswert());
 		System.out.println("Lebenspunkte: " + this.getLebenspunkte());
 		System.out.println("Waffe: " + this.getWaffe());
 		System.out.println("Staerke: " + this.getStaerke());
 		System.out.println("Ausdauer: " + this.getAusdauer());
+		System.out.println("-------------------------------");
 
 	}
 

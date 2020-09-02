@@ -97,11 +97,15 @@ public class Held extends Spielcharakter {
 
 	public void statusAusgeben() {
 
-		System.out.println("Status von dem Held " + this.getName() + ":");
+		System.out.println("");
+		System.out.println("-------------------------------");
+		System.out.println("Status des Helden " + this.getName() + ":");
+		System.out.println("-------------------------------");
 		System.out.println("Angriffswert: " + this.getAngriffswert());
 		System.out.println("Lebenspunkte: " + this.getLebenspunkte());
 		System.out.println("Waffe: " + this.getWaffe());
 		System.out.println("Staerke: " + this.getStaerke());
+		System.out.println("-------------------------------");
 
 	}
 

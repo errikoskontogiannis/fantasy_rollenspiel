@@ -40,9 +40,13 @@ public class Monster extends Spielcharakter {
 
 	public void statusAusgeben() {
 
-		System.out.println("Status von dem Monster:");
+		System.out.println("");
+		System.out.println("-------------------------------");
+		System.out.println("Status des Monsters:");
+		System.out.println("-------------------------------");
 		System.out.println("Angriffswert: " + this.getAngriffswert());
 		System.out.println("Lebenspunkte: " + this.getLebenspunkte());
+		System.out.println("-------------------------------");
 
 	}
 
