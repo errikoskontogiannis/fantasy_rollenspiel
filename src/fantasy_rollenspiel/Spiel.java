@@ -21,6 +21,12 @@ public class Spiel {
     private int wuerfelJa;
     private int wuerfelNein;
 
+    private String heldenName;
+    private String zaubererName;
+    private String kriegerName;
+
+    private boolean schonGespielt;
+
     Scanner in = new Scanner(System.in);
 
     public Spiel(String pHeldenTyp) {
@@ -49,9 +55,14 @@ public class Spiel {
         if (aktuellerHeldenTyp.equals("Held")) {
 
             System.out.println("");
-            System.out.println("Bitte geben Sie Ihrem Helden einen Namen.");
 
-            String heldenName = in.nextLine();
+            if (schonGespielt == false) {
+
+                System.out.println("Bitte geben Sie Ihrem Helden einen Namen.");
+
+                heldenName = in.nextLine();
+
+            }
 
             System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
@@ -102,9 +113,14 @@ public class Spiel {
         } else if (aktuellerHeldenTyp.equals("Zauberer")) {
 
             System.out.println("");
-            System.out.println("Bitte geben Sie Ihrem Zauberer einen Namen.");
 
-            String zaubererName = in.nextLine();
+            if (schonGespielt == false) {
+
+                System.out.println("Bitte geben Sie Ihrem Zauberer einen Namen.");
+
+                zaubererName = in.nextLine();
+
+            }
 
             System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
@@ -155,9 +171,14 @@ public class Spiel {
         } else if (aktuellerHeldenTyp.equals("Krieger")) {
 
             System.out.println("");
-            System.out.println("Bitte geben Sie Ihrem Krieger einen Namen.");
 
-            String kriegerName = in.nextLine();
+            if (schonGespielt == false) {
+
+                System.out.println("Bitte geben Sie Ihrem Krieger einen Namen.");
+
+                kriegerName = in.nextLine();
+
+            }
 
             System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
@@ -216,9 +237,17 @@ public class Spiel {
 
         String antwortSpielen = in.nextLine();
 
-        if (antwortSpielen.equals("Ja") || antwortSpielen.equals("Nein") || antwortSpielen.equals("ja") || antwortSpielen.equals("nein")) {
+        if (antwortSpielen.equals("Ja") || antwortSpielen.equals("ja")) {
+
+            schonGespielt = true;
 
             spielen();
+
+        } else if (antwortSpielen.equals("Nein") || antwortSpielen.equals("nein")) {
+
+            System.out.println("");
+            System.out.println("Vielen Dank fürs Spielen!");
+            System.exit(0);
 
         } else {
 

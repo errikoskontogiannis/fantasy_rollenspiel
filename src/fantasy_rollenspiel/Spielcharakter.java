@@ -4,16 +4,18 @@ package fantasy_rollenspiel;
 
 public abstract class Spielcharakter {
 
-    public Spielcharakter() {
+    protected String name;
+    protected int angriffswert;
+    protected double lebenspunkte;
 
+    abstract void setAngriffswert(int pAngriffswert);
 
+    abstract int getAngriffswert();
 
-    }
+    abstract void setLebenspunkte(double pLebenspunkte);
 
-    public void statusAusgeben() {
+    abstract double getLebenspunkte();
 
-
-
-    }
+    abstract void statusAusgeben();
 
 }
