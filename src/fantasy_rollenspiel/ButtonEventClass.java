@@ -78,13 +78,7 @@ public class ButtonEventClass extends JFrame implements ActionListener {
 
         clearScreen();
 
-        System.out.println("Bitte waehlen Sie Ihren Spielcharakter");
-
-        Scanner in = new Scanner(System.in);
-
-        String heldenTyp = in.nextLine();
-
-        new Spiel(heldenTyp);
+        new Spiel();
 
     }
 

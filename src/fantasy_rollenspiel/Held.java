@@ -4,10 +4,7 @@ package fantasy_rollenspiel;
 
 public class Held extends Spielcharakter {
 
-	protected String name;
 	protected int staerke;
-	protected int angriffswert;
-	protected double lebenspunkte;
 
 	protected Waffe meineWaffe = null;
 
@@ -20,47 +17,9 @@ public class Held extends Spielcharakter {
 
 	}
 
-	public String getName() {
+	public void setStaerke(int pStaerke) { staerke = pStaerke; }
 
-		return name;
-
-	}
-
-	public void setStaerke(int pStaerke) {
-
-		staerke = pStaerke;
-
-	}
-
-	public int getStaerke() {
-
-		return staerke;
-
-	}
-
-	public void setAngriffswert(int pAngriffswert) {
-
-		angriffswert = pAngriffswert;
-
-	}
-
-	public int getAngriffswert() {
-
-		return angriffswert;
-
-	}
-
-	public void setLebenspunkte(double pLebenspunkte) {
-
-		lebenspunkte = pLebenspunkte;
-
-	}
-
-	public double getLebenspunkte() {
-
-		return lebenspunkte;
-
-	}
+	public int getStaerke() { return staerke; }
 
 	public void setWaffe(String pMaterial) {
 
@@ -69,17 +28,9 @@ public class Held extends Spielcharakter {
 
 	}
 
-	public Waffe getWaffe() {
+	public Waffe getWaffe() { return meineWaffe; }
 
-		return meineWaffe;
-
-	}
-
-	public void angreifen(Monster pMonster, Kampfregel pKampfregel) {
-
-		pKampfregel.kampf(this, pMonster);
-
-	}
+	public void angreifen(Monster pMonster, Kampfregel pKampfregel) { pKampfregel.kampf(this, pMonster); }
 
 	public void angriffswertBerechnen() {
 

@@ -4,7 +4,7 @@ package fantasy_rollenspiel;
 
 public class Krieger extends Held {
 
-	private int ausdauer;
+	protected int ausdauer;
 
 	public Krieger(String pName, int pStaerke, int pAngriffswert, int pLebenspunkte, int pAusdauer) {
 
@@ -21,17 +21,9 @@ public class Krieger extends Held {
 
 	}
 
-	public void setAusdauer(int pAusdauer) {
+	public void setAusdauer(int pAusdauer) { ausdauer = pAusdauer; }
 
-		ausdauer = pAusdauer;
-
-	}
-
-	public int getAusdauer() {
-
-		return ausdauer;
-
-	}
+	public int getAusdauer() { return ausdauer; }
 
 	public void statusAusgeben() {
 

@@ -41,25 +41,25 @@ public class Kampfregel {
 
 		if (k1.getAngriffswert() > k2.getAngriffswert()) {
 
-			k2.setLebenspunkte(k2.getLebenspunkte() - 1.0);
+			k2.setLebenspunkte(k2.getLebenspunkte() - 1);
 
-			anzeigen();
+			status();
 
 			System.out.println("");
 			System.out.println(k1.getName() + " hat den Kampf gewonnen!");
 
 		} else if (k1.getAngriffswert() < k2.getAngriffswert()) {
 
-			k1.setLebenspunkte(k1.getLebenspunkte() - 1.0);
+			k1.setLebenspunkte(k1.getLebenspunkte() - 1);
 
-			anzeigen();
+			status();
 
 			System.out.println("");
 			System.out.println("Das Monster hat den Kampf gewonnen!");
 
 		} else {
 
-			anzeigen();
+			status();
 
 			System.out.println("");
 			System.out.println(k1.getName() + " und das Monster haben den Kampf beendet.");
@@ -68,7 +68,7 @@ public class Kampfregel {
 
 	}
 
-	private void anzeigen() {
+	private void status() {
 
 		cHeld.statusAusgeben();
 		cMonster.statusAusgeben();

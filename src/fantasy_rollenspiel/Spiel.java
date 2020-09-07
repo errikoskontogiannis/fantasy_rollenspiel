@@ -1,5 +1,7 @@
 package fantasy_rollenspiel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 // Spiel
@@ -10,7 +12,9 @@ public class Spiel {
     private Zauberer zauberer;
     private Krieger krieger;
 
-    private String aktuellerHeldenTyp;
+    private List<Spielcharakter> gespeicherteSpielcharaktere = new ArrayList<Spielcharakter>();
+
+    private String aktuellerSpielCharakter;
 
     private Monster monster = new Monster(550, 5);
     private Kampfregel kampfregel = new Kampfregel();
@@ -26,18 +30,32 @@ public class Spiel {
     private String kriegerName;
 
     private boolean schonGespielt;
+    private boolean derselbeCharakter;
+
+    private int x = 0;
 
     Scanner in = new Scanner(System.in);
 
-    public Spiel(String pHeldenTyp) {
+    public Spiel() {
 
-        aktuellerHeldenTyp = pHeldenTyp;
+        charakterWaehlen();
+        spielen();
 
-        if (aktuellerHeldenTyp.equals("Held") || aktuellerHeldenTyp.equals("Zauberer") || aktuellerHeldenTyp.equals("Krieger")) {
+    }
 
-            System.out.println("Sie haben den Spielcharakter " + pHeldenTyp + " gewaehlt.");
+    public void charakterWaehlen() {
 
-            spielen();
+        System.out.println("");
+        System.out.println("Bitte waehlen Sie Ihren Spielcharakter");
+
+        Scanner in = new Scanner(System.in);
+
+        aktuellerSpielCharakter = in.nextLine();
+
+        if (aktuellerSpielCharakter.equals("Held") || aktuellerSpielCharakter.equals("Zauberer") || aktuellerSpielCharakter.equals("Krieger")) {
+
+            System.out.println("");
+            System.out.println("Sie haben den Spielcharakter " + aktuellerSpielCharakter + " gewaehlt.");
 
         } else {
 
@@ -52,7 +70,9 @@ public class Spiel {
         wuerfelJa = this.pW6.wuerfeln() + this.pW10.wuerfeln();
         wuerfelNein = this.pW6.wuerfeln() + this.pW10.wuerfeln();
 
-        if (aktuellerHeldenTyp.equals("Held")) {
+        // Held
+
+        if (aktuellerSpielCharakter.equals("Held")) {
 
             System.out.println("");
 
@@ -62,14 +82,23 @@ public class Spiel {
 
                 heldenName = in.nextLine();
 
+            } else if (schonGespielt == true && derselbeCharakter == false) {
+
+                System.out.println("Bitte geben Sie Ihrem Helden einen Namen.");
+
+                heldenName = in.nextLine();
+
             }
 
+            System.out.println("");
             System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
             if (wuerfelJa > wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + heldenName + " auswaehlen.");
 
+                System.out.println("");
                 System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Helden.");
 
                 String heldenWaffeMaterial = in.nextLine();
@@ -84,6 +113,10 @@ public class Spiel {
 
                     held.angreifen(monster, kampfregel);
 
+                    held.setTyp("Held");
+
+                    charakterSpeichern(held);
+
                     erneutSpielen();
 
                 } else {
@@ -94,6 +127,7 @@ public class Spiel {
 
             } else if (wuerfelJa < wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + heldenName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
 
                 held = new Held(heldenName, 550, 0, 5);
@@ -102,15 +136,28 @@ public class Spiel {
 
                 held.angreifen(monster, kampfregel);
 
+                held.setTyp("Held");
+
+                charakterSpeichern(held);
+
                 erneutSpielen();
 
             } else if (wuerfelJa == wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
+
+                held.setTyp("Held");
+
+                charakterSpeichern(held);
+
+                erneutSpielen();
 
             }
 
-        } else if (aktuellerHeldenTyp.equals("Zauberer")) {
+            // Zauberer
+
+        } else if (aktuellerSpielCharakter.equals("Zauberer")) {
 
             System.out.println("");
 
@@ -120,14 +167,23 @@ public class Spiel {
 
                 zaubererName = in.nextLine();
 
+            } else if (schonGespielt == true && derselbeCharakter == false) {
+
+                System.out.println("Bitte geben Sie Ihrem Zauberer einen Namen.");
+
+                zaubererName = in.nextLine();
+
             }
 
+            System.out.println("");
             System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
             if (wuerfelJa > wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + zaubererName + " auswaehlen.");
 
+                System.out.println("");
                 System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Zauberers.");
 
                 String zaubererWaffeMaterial = in.nextLine();
@@ -142,6 +198,10 @@ public class Spiel {
 
                     zauberer.angreifen(monster, kampfregel);
 
+                    zauberer.setTyp("Zauberer");
+
+                    charakterSpeichern(zauberer);
+
                     erneutSpielen();
 
                 } else {
@@ -152,6 +212,7 @@ public class Spiel {
 
             } else if (wuerfelJa < wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + zaubererName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
 
                 zauberer = new Zauberer(zaubererName, 550, 0, 5, 550);
@@ -160,15 +221,28 @@ public class Spiel {
 
                 zauberer.angreifen(monster, kampfregel);
 
+                zauberer.setTyp("Zauberer");
+
+                charakterSpeichern(zauberer);
+
                 erneutSpielen();
 
             } else if (wuerfelJa == wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
+
+                zauberer.setTyp("Zauberer");
+
+                charakterSpeichern(zauberer);
+
+                erneutSpielen();
 
             }
 
-        } else if (aktuellerHeldenTyp.equals("Krieger")) {
+            // Krieger
+
+        } else if (aktuellerSpielCharakter.equals("Krieger")) {
 
             System.out.println("");
 
@@ -178,14 +252,23 @@ public class Spiel {
 
                 kriegerName = in.nextLine();
 
+            } else if (schonGespielt == true && derselbeCharakter == false) {
+
+                System.out.println("Bitte geben Sie Ihrem Krieger einen Namen.");
+
+                kriegerName = in.nextLine();
+
             }
 
+            System.out.println("");
             System.out.println("Waffenmoeglichkeitswuerfel lädt...");
 
             if (wuerfelJa > wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben Glueck! Sie koennen jetzt eine Waffe für " + kriegerName + " auswaehlen.");
 
+                System.out.println("");
                 System.out.println("Bitte waehlen Sie das Material der Waffe Ihres Kriegers.");
 
                 String kriegerWaffeMaterial = in.nextLine();
@@ -200,6 +283,10 @@ public class Spiel {
 
                     krieger.angreifen(monster, kampfregel);
 
+                    krieger.setTyp("Krieger");
+
+                    charakterSpeichern(krieger);
+
                     erneutSpielen();
 
                 } else {
@@ -210,6 +297,7 @@ public class Spiel {
 
             } else if (wuerfelJa < wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben kein Glück! Sie koennen keine Waffe für " + kriegerName + " auswaehlen." + " Sie können nur mit Ihrer Staerke kaempfen.");
 
                 krieger = new Krieger(kriegerName, 550, 0, 5, 5);
@@ -218,11 +306,22 @@ public class Spiel {
 
                 krieger.angreifen(monster, kampfregel);
 
+                krieger.setTyp("Krieger");
+
+                charakterSpeichern(krieger);
+
                 erneutSpielen();
 
             } else if (wuerfelJa == wuerfelNein) {
 
+                System.out.println("");
                 System.out.println("Sie haben sehr viel Glueck! Sie haben die Superwaffe bekommen und den Kampf gewonnen.");
+
+                krieger.setTyp("Krieger");
+
+                charakterSpeichern(krieger);
+
+                erneutSpielen();
 
             }
 
@@ -241,9 +340,39 @@ public class Spiel {
 
             schonGespielt = true;
 
-            spielen();
+            System.out.println("");
+            System.out.println("Mit dem selben Spielcharakter?");
+
+            String antwortSpielcharakter = in.nextLine();
+
+            if (antwortSpielcharakter.equals("Ja") || antwortSpielcharakter.equals("ja")) {
+
+                derselbeCharakter = true;
+
+                System.out.println("");
+                System.out.println("Ok!");
+
+                spielen();
+
+            } else if (antwortSpielcharakter.equals("Nein") || antwortSpielcharakter.equals("nein")) {
+
+                derselbeCharakter = false;
+
+                System.out.println("");
+                System.out.println("Ok!");
+
+                charakterWaehlen();
+                spielen();
+
+            } else {
+
+                throw new IllegalArgumentException("Bitte waehlen Sie eine der verfuegbaren Optionen! (Verfuegbare Optionen: Ja oder Nein)");
+
+            }
 
         } else if (antwortSpielen.equals("Nein") || antwortSpielen.equals("nein")) {
+
+            ranglisteAnzeigen();
 
             System.out.println("");
             System.out.println("Vielen Dank fürs Spielen!");
@@ -254,6 +383,35 @@ public class Spiel {
             throw new IllegalArgumentException("Bitte waehlen Sie eine der verfuegbaren Optionen! (Verfuegbare Optionen: Ja oder Nein)");
 
         }
+
+    }
+
+    public void charakterSpeichern(Spielcharakter pSpielcharakter) {
+
+        if (derselbeCharakter) {
+
+            gespeicherteSpielcharaktere.set(x, pSpielcharakter);
+
+        } else {
+
+            gespeicherteSpielcharaktere.add(pSpielcharakter);
+
+        }
+
+    }
+
+    public void ranglisteAnzeigen() {
+
+        gespeicherteSpielcharaktere = Rangliste.SortByHealth(gespeicherteSpielcharaktere);
+
+        System.out.println("");
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("Aktuelle Rangliste von Spielern");
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("Rang        Name        Spielcharakter        Lebenspunkte");
+        System.out.println("----------------------------------------------------------------------");
+        for(int i=0; i<gespeicherteSpielcharaktere.size(); i++) { System.out.println((i+1) + "        " + gespeicherteSpielcharaktere.get(i).getName() + "              " + gespeicherteSpielcharaktere.get(i).getTyp()  + "              " + gespeicherteSpielcharaktere.get(i).getLebenspunkte()); }
+        System.out.println("----------------------------------------------------------------------");
 
     }
 

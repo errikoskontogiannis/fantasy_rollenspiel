@@ -25,29 +25,13 @@ public class Waffe {
 
 	}
 
-	public void setBonus(int pBonus) {
+	public void setBonus(int pBonus) { bonus = pBonus; }
 
-		bonus = pBonus;
+	public int getBonus() { return bonus; }
 
-	}
+	public void setMagie(int pMagie) { magie = pMagie; }
 
-	public int getBonus() {
-
-		return bonus;
-
-	}
-
-	public void setMagie(int pMagie) {
-
-		magie = pMagie;
-
-	}
-
-	public int getMagie() {
-
-		return magie;
-
-	}
+	public int getMagie() { return magie; }
 
 	public void setMaterial(String pMaterial) {
 
@@ -63,11 +47,7 @@ public class Waffe {
 
 	}
 
-	public String getMaterial() {
-
-		return material;
-
-	}
+	public String getMaterial() { return material; }
 
 	public int bonusBerechnen() {
 

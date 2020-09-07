@@ -4,7 +4,7 @@ package fantasy_rollenspiel;
 
 public class Zauberer extends Held {
 
-	private int zauberKraft;
+	protected int zauberKraft;
 
 	public Zauberer(String pName, int pStaerke, int pAngriffswert, int pLebenspunkte, int pZauberkraft) {
 
@@ -14,23 +14,11 @@ public class Zauberer extends Held {
 
 	}
 
-	public void heilen() {
+	public void heilen() { lebenspunkte = lebenspunkte + 1; }
 
-		lebenspunkte = lebenspunkte + 0.5;
+	public void setZauberKraft(int pZauberKraft) { zauberKraft = pZauberKraft; }
 
-	}
-
-	public void setZauberKraft(int pZauberKraft) {
-
-		zauberKraft = pZauberKraft;
-
-	}
-
-	public int getZauberKraft() {
-
-		return zauberKraft;
-
-	}
+	public int getZauberKraft() { return zauberKraft; }
 
 	public void statusAusgeben() {
 

@@ -4,37 +4,10 @@ package fantasy_rollenspiel;
 
 public class Monster extends Spielcharakter {
 
-	private int angriffswert;
-	private double lebenspunkte;
-
-	public Monster(int pAngriffswert, double pLebenspunkte) {
+	public Monster(int pAngriffswert, int pLebenspunkte) {
 
 		angriffswert = pAngriffswert;
 		lebenspunkte = pLebenspunkte;
-
-	}
-
-	public void setAngriffswert(int pAngriffswert) {
-
-		angriffswert = pAngriffswert;
-
-	}
-
-	public int getAngriffswert() {
-
-		return angriffswert;
-
-	}
-
-	public void setLebenspunkte(double pLebenspunkte) {
-
-		lebenspunkte = pLebenspunkte;
-
-	}
-
-	public double getLebenspunkte() {
-
-		return lebenspunkte;
 
 	}
 

@@ -8,11 +8,7 @@ public class Wuerfel {
 
 	static int anzahlSeiten;
 
-	public Wuerfel(int pAnzahlSeiten) {
-
-		anzahlSeiten = pAnzahlSeiten;
-
-	}
+	public Wuerfel(int pAnzahlSeiten) { anzahlSeiten = pAnzahlSeiten; }
 
 	public static int wuerfeln() {
 
